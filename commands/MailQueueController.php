@@ -58,7 +58,7 @@ class MailQueueController extends Controller
                 MailSchedule::STATUS_ACTIVE, 
                 MailSchedule::STATUS_FAILED
                 ]
-            ])->andWhere(['<','to_sent_at', $currentUnixTimestamp])->all();
+            ])->andWhere(['<','to_sent_at', $currentUnixTimestamp])->limit(10)->all();
 
         foreach($mailQueue as $item){
             if($this->actionSend($item->recipient, $item->body) == true){
